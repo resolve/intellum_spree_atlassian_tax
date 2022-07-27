@@ -26,14 +26,15 @@ module SpreeAvataxOfficial
       ).to_json
     end
 
+    # TODO: Remove this temporary fix and include the correct from shipping*
     def ship_from_address
       {
-        line1:      address[:line1],
-        line2:      address[:line2],
-        city:       address[:city],
-        region:     address[:region],
-        country:    address[:country],
-        postalCode: address[:postalCode]
+        line1:      '21092 Beach Blvd',
+        line2:      nil,
+        city:       'Huntington Beach',
+        region:     'CA',
+        country:    'US',
+        postalCode: '92648'
       }
     end
   end

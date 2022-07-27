@@ -14,17 +14,30 @@ module SpreeAvataxOfficial
 
     private
 
+    # def client
+    #   AvaTax::Client.new(
+    #     app_name:           APP_NAME,
+    #     app_version:        APP_VERSION,
+    #     connection_options: CONNECTION_OPTIONS,
+    #     logger:             true,
+    #     faraday_response:   true,
+    #     endpoint:           SpreeAvataxOfficial::Config.endpoint,
+    #     username:           SpreeAvataxOfficial::Config.account_number,
+    #     password:           SpreeAvataxOfficial::Config.license_key
+    #   )
+    # end
+
     def client
-      AvaTax::Client.new(
-        app_name:           APP_NAME,
-        app_version:        APP_VERSION,
-        connection_options: CONNECTION_OPTIONS,
-        logger:             true,
-        faraday_response:   true,
-        endpoint:           SpreeAvataxOfficial::Config.endpoint,
-        username:           SpreeAvataxOfficial::Config.account_number,
-        password:           SpreeAvataxOfficial::Config.license_key
-      )
+      Faraday.new(SpreeAvataxOfficial::Config.endpoint) do |con|
+        con.request :basic_auth,
+                    SpreeAvataxOfficial::Config.account_number,
+                    SpreeAvataxOfficial::Config.license_key
+        con.headers['sourceSystem'] = 'CCP'
+        con.headers['Content-Type'] = 'application/json'
+        con.adapter :net_http
+        con.request :retry
+        con.response :json, content_type: /\bjson$/
+      end
     end
 
     def company_code(order)
@@ -34,6 +47,8 @@ module SpreeAvataxOfficial
     def request_result(response, object = nil)
       status        = response.try(:status)
       response_body = status ? response.body : response
+
+      # binding.pry
 
       if request_error?(status, response_body)
         logger.error(object, response)

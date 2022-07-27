@@ -13,4 +13,5 @@ gem 'spree_backend'
 gem 'spree_core'
 gem 'sass-rails'
 gem 'deface'
+gem 'faraday'
 gemspec

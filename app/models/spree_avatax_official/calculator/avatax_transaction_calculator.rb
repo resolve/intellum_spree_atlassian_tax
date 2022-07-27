@@ -2,7 +2,7 @@ module SpreeAvataxOfficial
   module Calculator
     class AvataxTransactionCalculator < ::Spree::Calculator::DefaultTax
       def self.description
-        'AvaTax transaction calculator'
+        'Atlassian Tax Calculator'
       end
 
       def compute_order(_order)

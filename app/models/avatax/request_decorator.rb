@@ -2,6 +2,22 @@ module Avatax
   module RequestDecorator
     include ::SpreeAvataxOfficial::HttpHelper
 
+    def get(path, options={}, apiversion="", headers=Hash.new)
+      request(:get, path, nil, options)
+    end
+
+    def post(path, model, options={}, apiversion="", headers=Hash.new)
+      request(:post, path, model, options)
+    end
+
+    def put(path, model, options={}, apiversion="", headers=Hash.new)
+      request(:put, path, model, options)
+    end
+
+    def delete(path, options={}, apiversion="", headers=Hash.new)
+      request(:delete, path, nil, options)
+    end
+
     def request(method, path, model, options = {})
       max_retries                  ||= ::SpreeAvataxOfficial::Config.max_retries
       uri_encoded_path               = URI.parse(path).to_s
