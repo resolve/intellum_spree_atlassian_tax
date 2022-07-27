@@ -5,23 +5,16 @@ require 'spree_avatax_official/version'
 
 Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
   s.platform              = Gem::Platform::RUBY
-  s.name                  = 'spree_avatax_official'
+  s.name                  = 'intellum_spree_atlassian_tax'
   s.version               = SpreeAvataxOfficial.version
-  s.summary               = 'The official certified Spree Avatax'
-  s.description           = 'The new officially supported Avalara AvaTax extension for Spree Commerce using Avalara REST API v2'
+  s.summary               = 'The official certified Spree Atlassian Tax'
+  s.description           = 'The new officially supported Atlassian Tax extension for Spree Commerce'
   s.required_ruby_version = '>= 2.0.0'
 
-  s.author   = 'Spark Solutions'
-  s.email    = 'we@sparksolutions.co'
-  s.homepage = 'https://sparksolutions.co'
+  s.author   = 'Resolve Digital'
+  s.email    = 'development@resolvedigital.com'
+  s.homepage = 'https://resolvedigital.com'
   s.license  = 'BSD-3-Clause'
-
-  s.metadata = {
-    "bug_tracker_uri"   => "https://github.com/spree/spree_avatax_official/issues",
-    "changelog_uri"     => "https://github.com/spree/spree_avatax_official/releases/tag/v#{s.version}",
-    "documentation_uri" => "https://github.com/spree-contrib/spree_avatax_official",
-    "source_code_uri"   => "https://github.com/spree/spree_avatax_official/tree/v#{s.version}",
-  }
 
   s.files       = `git ls-files`.split("\n")
   s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
