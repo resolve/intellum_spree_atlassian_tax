@@ -26,9 +26,9 @@ module SpreeAvataxOfficial
       {
         number:      item.avatax_number,
         quantity:    item_quantity,
-        amount:      item_amount,
+        amount:      item_amount.to_f,
         taxCode:     item.avatax_tax_code,
-        discounted:  discounted?,
+        discounted:  !discounted?, # Bug on this method returning 0 all the time.
         addresses:   line_item_addresses_payload,
         taxIncluded: item.included_in_price
       }
@@ -37,7 +37,7 @@ module SpreeAvataxOfficial
     def line_item_payload
       {
         description: item.name[0..255],
-        itemCode:    item.variant.sku
+        itemCode:    item.variant.sku[0..49]
       }
     end
 

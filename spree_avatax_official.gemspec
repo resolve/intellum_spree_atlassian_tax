@@ -5,7 +5,7 @@ require 'spree_avatax_official/version'
 
 Gem::Specification.new do |s| # rubocop:disable Metrics/BlockLength
   s.platform              = Gem::Platform::RUBY
-  s.name                  = 'intellum_spree_atlassian_tax'
+  s.name                  = 'spree_avatax_official'
   s.version               = SpreeAvataxOfficial.version
   s.summary               = 'The official certified Spree Atlassian Tax'
   s.description           = 'The new officially supported Atlassian Tax extension for Spree Commerce'

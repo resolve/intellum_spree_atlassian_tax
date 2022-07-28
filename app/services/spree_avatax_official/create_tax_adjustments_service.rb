@@ -45,7 +45,7 @@ module SpreeAvataxOfficial
     end
 
     def process_avatax_item(order, avatax_item)
-      tax_amount = avatax_item['taxCalculated']
+      tax_amount = avatax_item['taxCalculated'] + 10 # TODO: Fix, just for testing until the endpoint bug get fixed
 
       return if tax_amount.zero?
 

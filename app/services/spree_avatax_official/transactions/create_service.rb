@@ -7,7 +7,6 @@ module SpreeAvataxOfficial
         transaction_type = choose_transaction_type(order)
         response         = send_request(order, transaction_type, options)
 
-        # binding.pry
         request_result(response, order) do
           if order.completed? && response.body['id'].to_i.positive?
             create_transaction!(
@@ -33,24 +32,24 @@ module SpreeAvataxOfficial
         end
       end
 
-      # def send_request(order, transaction_type, options)
-      #   create_transaction_model = SpreeAvataxOfficial::Transactions::CreatePresenter.new(
-      #     order:            order,
-      #     transaction_type: transaction_type
-      #   ).to_json
-      #
-      #   logger.info(create_transaction_model)
-      #
-      #   client.create_transaction(create_transaction_model, options)
-      # end
-
       def send_request(order, transaction_type, options)
-        # binding.pry
-        client.post do |req|
-          req.url '/finsys/api/1/avalara/transactions/create'
-          req.body = formated_order(order, transaction_type).to_json
-        end
+        create_transaction_model = SpreeAvataxOfficial::Transactions::CreatePresenter.new(
+          order:            order,
+          transaction_type: transaction_type
+        ).to_json
+
+        logger.info(create_transaction_model)
+
+        client.create_transaction(create_transaction_model, options)
       end
+
+      # def send_request(order, transaction_type, options)
+      #   # binding.pry
+      #   client.post do |req|
+      #     req.url '/finsys/api/1/avalara/transactions/create'
+      #     req.body = formated_order(order, transaction_type).to_json
+      #   end
+      # end
 
 
       def format_items(line_item)
@@ -63,7 +62,7 @@ module SpreeAvataxOfficial
           item['taxCode']     = line_item.tax_category.try :tax_code
           item['itemCode']    = line_item.sku
           item['description'] = line_item.name
-          item['discounted']  = !line_item.adjustments.promotion.any?
+          item['discounted']  = line_item.adjustments.promotion.any?
         end
       end
 

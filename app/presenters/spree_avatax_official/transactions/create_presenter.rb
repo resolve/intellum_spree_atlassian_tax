@@ -19,10 +19,10 @@ module SpreeAvataxOfficial
           addresses:       addresses_payload,
           lines:           items_payload,
           commit:          completed?(order),
-          discount:        order.avatax_discount_amount,
+          discount:        order.avatax_discount_amount.to_f,
           currencyCode:    currency_code,
           purchaseOrderNo: order.number,
-          entityUseCode:   entity_use_code
+          entityUseCode:   entity_use_code || ''
         }
       end
 
