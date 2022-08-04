@@ -17,7 +17,7 @@ module SpreeAtlassianTax
         SpreeAtlassianTax::CreateTaxAdjustmentsService.call(order: order)
       end
 
-      def avatax_tax_code
+      def atlassian_tax_code
         tax_category.try(:tax_code).presence || ::Spree::TaxCategory::DEFAULT_TAX_CODES['LineItem']
       end
     end
