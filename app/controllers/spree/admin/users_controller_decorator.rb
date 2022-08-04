@@ -2,15 +2,15 @@ module Spree
   module Admin
     module UsersControllerDecorator
       def self.prepended(base)
-        base.before_action :load_use_codes, only: :avalara_information
+        base.before_action :load_use_codes, only: :atlassian_information
       end
 
-      def avalara_information
+      def atlassian_information
         if request.put? && @user.update_attributes(user_params)
           flash.now[:success] = Spree.t(:account_updated)
         end
 
-        render :avalara_information
+        render :atlassian_information
       end
 
       private
@@ -18,7 +18,7 @@ module Spree
       def load_use_codes
         return if request.put?
 
-        @use_codes = SpreeAvataxOfficial::EntityUseCode.all.map { |use_code| ["#{use_code.code} - #{use_code.name}", use_code.id] }
+        @use_codes = SpreeAtlassianTax::EntityUseCode.all.map { |use_code| ["#{use_code.code} - #{use_code.name}", use_code.id] }
       end
     end
   end

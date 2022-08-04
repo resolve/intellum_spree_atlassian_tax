@@ -1,0 +1,64 @@
+<h1><%= Spree.t('spree_atlassian_tax.settings') %></h1>
+
+<%= form_tag(admin_atlassian_settings_path, method: :put, id: :atlassian_settings_form) do %>
+
+  <div class="yui-g">
+    <div class="yui-u first">
+      <fieldset>
+        <legend><%= Spree.t('spree_atlassian_tax.enabled') %></legend>
+        <div class="checkbox">
+          <label>
+            <%= hidden_field_tag('enabled', false) %>
+            <%= check_box_tag('enabled', true, SpreeAtlassianTax::Config.enabled) %>
+            <%= Spree.t('spree_atlassian_tax.enabled') %>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><%= Spree.t('spree_atlassian_tax.atlassian_credentials') %></legend>
+        <p>
+          <label><%= Spree.t('spree_atlassian_tax.account_number') %></label><br />
+          <%= text_field_tag('account_number', SpreeAtlassianTax::Config.account_number, size: 46, maxlength: 256, class: 'form-control') %>
+        </p>
+        <p>
+          <label><%= Spree.t('spree_atlassian_tax.license_key') %></label><br />
+          <%= text_field_tag('license_key', SpreeAtlassianTax::Config.license_key, size: 46, maxlength: 256, class: 'form-control') %>
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend><%= Spree.t('spree_atlassian_tax.endpoint_urls') %></legend>
+        <p>
+          <label><%= Spree.t('spree_atlassian_tax.endpoint') %></label><br />
+          <%= text_field_tag('endpoint', SpreeAtlassianTax::Config.endpoint, size: 46, maxlength: 256, class: 'form-control') %>
+        </p>
+      </fieldset>
+
+      <fieldset>
+        <legend><%= Spree.t('spree_atlassian_tax.commit_transaction_enabled') %></legend>
+        <div class="checkbox">
+          <label>
+            <%= hidden_field_tag('commit_transaction_enabled', false) %>
+            <%= check_box_tag('commit_transaction_enabled', true, SpreeAtlassianTax::Config.commit_transaction_enabled) %>
+            <%= Spree.t('spree_atlassian_tax.commit_transaction_enabled') %>
+          </label>
+        </div>
+      </fieldset>
+
+      <fieldset>
+        <legend><%= Spree.t('spree_atlassian_tax.address_validation') %></legend>
+        <div class="checkbox">
+          <label>
+            <%= hidden_field_tag('address_validation_enabled', false) %>
+            <%= check_box_tag('address_validation_enabled', true, SpreeAtlassianTax::Config.address_validation_enabled) %>
+            <%= Spree.t('spree_atlassian_tax.enable_address_validation') %>
+          </label>
+        </p>
+      </fieldset>
+    </div>
+  </div>
+
+  <p class="form-buttons"><%= button Spree.t('spree_atlassian_tax.save_preferences') %></p>
+  <p class="form-buttons"><%=link_to Spree.t('spree_atlassian_tax.ping_atlassian'), :admin_atlassian_ping, method: :post, class: 'btn btn-primary' %></p>
+<% end %>
