@@ -6,7 +6,7 @@ module AtlassianTax::Api::Transactions
   end
 
   def create_transaction(model, options={})
-    path = '/finsys/api/1/avalara/transactions/create'
+    path = '/finsys/api/1/avalara/transactions/createoradjust'
     post(path, model, options)
   end
 end

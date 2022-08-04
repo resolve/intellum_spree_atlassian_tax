@@ -11,7 +11,7 @@ module SpreeAtlassianTax
 
       transaction_cache_key = SpreeAtlassianTax::GenerateTransactionCacheKeyService.call(order: order).value
 
-      atlassian_response       = Rails.cache.fetch(transaction_cache_key, expires_in: 5.minutes) do
+      atlassian_response = Rails.cache.fetch(transaction_cache_key, expires_in: 5.minutes) do
         send_transaction_to_atlassian(order)
       end
 
@@ -45,7 +45,7 @@ module SpreeAtlassianTax
     end
 
     def process_atlassian_item(order, atlassian_item)
-      tax_amount = atlassian_item['taxCalculated'] + 10 # TODO: Fix, just for testing until the endpoint bug get fixed
+      tax_amount = atlassian_item['taxCalculated']
 
       return if tax_amount.zero?
 
@@ -121,9 +121,10 @@ module SpreeAtlassianTax
     def build_error_message_from_response(atlassian_response)
       return ::Spree.t('spree_atlassian_tax.create_tax_adjustments.tax_calculation_failed') unless error_present?(atlassian_response)
 
-      atlassian_response['error']['details'].map do |error_detail_entry|
-        "#{error_detail_entry['number']} - #{error_detail_entry['message']} - #{error_detail_entry['description']}."
-      end.join(' ')
+      # Todo: Handle errors from atlassian instead of avatax
+      atlassian_response['error'] # ['details'].map do |error_detail_entry|
+      #   "#{error_detail_entry['number']} - #{error_detail_entry['message']} - #{error_detail_entry['description']}."
+      # end.join(' ')
     end
 
     def error_present?(atlassian_response)
