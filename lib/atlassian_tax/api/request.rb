@@ -1,6 +1,6 @@
 module AtlassianTax::Api
   module Request
-    include ::SpreeAvataxOfficial::HttpHelper
+    include ::SpreeAtlassianTax::HttpHelper
     include AtlassianTax::Api::Connection
 
     def get(path, options={}, apiversion="", headers=Hash.new)
@@ -20,7 +20,7 @@ module AtlassianTax::Api
     end
 
     def request(method, path, model, options = {})
-      max_retries                  ||= ::SpreeAvataxOfficial::Config.max_retries
+      max_retries                  ||= ::SpreeAtlassianTax::Config.max_retries
       uri_encoded_path               = URI.parse(path).to_s
       response                       = connection.send(method) do |request|
         request.options['timeout'] ||= 1_200
@@ -35,10 +35,10 @@ module AtlassianTax::Api
       end
 
       response.body
-    rescue *::SpreeAvataxOfficial::HttpHelper::CONNECTION_ERRORS => e
+    rescue *::SpreeAtlassianTax::HttpHelper::CONNECTION_ERRORS => e
       retry unless (max_retries -= 1).zero?
 
-      mock_error_response(e) # SpreeAvataxOfficial::HttpHelper method
+      mock_error_response(e) # SpreeAtlassianTax::HttpHelper method
     end
   end
 end

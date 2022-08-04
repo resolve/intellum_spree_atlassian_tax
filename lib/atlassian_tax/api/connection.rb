@@ -4,10 +4,10 @@ module AtlassianTax::Api::Connection
   private
 
   def connection
-    Faraday.new(::SpreeAvataxOfficial::Config.endpoint) do |con|
+    Faraday.new(::SpreeAtlassianTax::Config.endpoint) do |con|
       con.request :basic_auth,
-                  ::SpreeAvataxOfficial::Config.account_number,
-                  ::SpreeAvataxOfficial::Config.license_key
+                  ::SpreeAtlassianTax::Config.account_number,
+                  ::SpreeAtlassianTax::Config.license_key
       con.headers['sourceSystem'] = 'CCP'
       con.headers['Content-Type'] = 'application/json'
       con.adapter :net_http

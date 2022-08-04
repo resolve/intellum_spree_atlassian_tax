@@ -16,7 +16,7 @@ module SpreeAtlassianTax
     private
 
     def generate_uuid
-      self.avatax_uuid = SecureRandom.uuid if atlassian_uuid.blank?
+      self.atlassian_uuid = SecureRandom.uuid if atlassian_uuid.blank?
     end
   end
 end
