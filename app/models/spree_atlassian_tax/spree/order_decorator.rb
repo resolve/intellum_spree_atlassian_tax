@@ -46,7 +46,6 @@ module SpreeAtlassianTax
       end
 
       def recalculate_atlassian_taxes
-        binding.pry
         return unless SpreeAtlassianTax::Config.enabled
 
         SpreeAtlassianTax::CreateTaxAdjustmentsService.call(order: self)

@@ -19,7 +19,7 @@ module SpreeAtlassianTax
           addresses:       addresses_payload,
           lines:           items_payload,
           commit:          completed?(order),
-          discount:        order.atl_discount_amount.to_f,
+          discount:        order.atlassian_discount_amount.to_f,
           currencyCode:    currency_code,
           purchaseOrderNo: order.number,
           entityUseCode:   entity_use_code || ''
