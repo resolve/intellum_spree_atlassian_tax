@@ -1,6 +1,6 @@
-namespace :spree_avatax_official do
-  desc 'Migrate from SpreeAvataxCertified and create initial data.'
+namespace :spree_atlassian_tax do
+  desc 'Migrate from Spree Atlassian and create initial data.'
   task load_seeds: :environment do
-    SpreeAvataxOfficial::Seeder.new.seed!
+    SpreeAtlassianTax::Seeder.new.seed!
   end
 end

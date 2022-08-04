@@ -1,4 +1,4 @@
-module SpreeAvataxOfficial
+module SpreeAtlassianTax
   module Generators
     class InstallGenerator < Rails::Generators::Base
       class_option :run_migrations, type: :boolean, default: true
@@ -11,7 +11,7 @@ module SpreeAvataxOfficial
       end
 
       def add_migrations
-        run 'bundle exec rake railties:install:migrations FROM=spree_avatax_official'
+        run 'bundle exec rake railties:install:migrations FROM=spree_atlassian_tax'
       end
 
       def run_migrations
@@ -24,14 +24,14 @@ module SpreeAvataxOfficial
 
       def run_seeds
         if options[:run_seeds]
-          run 'bundle exec rake spree_avatax_official:load_seeds'
+          run 'bundle exec rake spree_atlassian_tax:load_seeds'
         else
-          puts 'Skipping seeds, you can run them through bundle exec rake spree_avatax_official:load_seeds'
+          puts 'Skipping seeds, you can run them through bundle exec rake spree_atlassian_tax:load_seeds'
         end
       end
 
       def copy_initializer
-        template 'config/initializers/spree_avatax_official.rb', 'config/initializers/spree_avatax_official.rb'
+        template 'config/initializers/spree_atlassian_tax.rb', 'config/initializers/spree_atlassian_tax.rb'
       end
     end
   end
