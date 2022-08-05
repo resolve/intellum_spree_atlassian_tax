@@ -1,1 +1,1 @@
-SpreeAvataxOfficial::Seeder.new.seed!
+SpreeAtlassianTax::Seeder.new.seed!
